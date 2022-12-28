@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Component.h"
 #include "Manager.h"
+#include "Label.h"
 
 #include "olcPixelGameEngine.h"
 
@@ -10,11 +10,11 @@
 
 namespace def::gui
 {
-	class Entry : public Component
+	class Button : public Component
 	{
 	public:
-		Entry() = default;
-		Entry(Manager& m, int32_t id, const olc::vi2d& pos, const olc::vi2d& size = { -1, -1 }, const std::string& text = "");
+		Button() = default;
+		Button(Manager& m, int32_t id, const std::string& text, const olc::vi2d& pos, const olc::vi2d& size = { -1, -1 });
 
 		virtual void DrawSelf(olc::PixelGameEngine* pge) override;
 
@@ -23,5 +23,6 @@ namespace def::gui
 
 	protected:
 		std::string sText;
+
 	};
 }

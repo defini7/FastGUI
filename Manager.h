@@ -16,7 +16,7 @@ namespace def::gui
 		~Manager();
 
 		size_t AddComponent(Component* c);
-		void Update(olc::PixelGameEngine& pge);
+		void Update(olc::PixelGameEngine* pge);
 
 		Theme& GetTheme();
 		size_t& GetSelected();

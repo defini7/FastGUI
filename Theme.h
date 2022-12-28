@@ -8,5 +8,6 @@ public:
 	olc::Pixel pBackground = olc::VERY_DARK_GREY;
 	olc::Pixel pBorders = olc::WHITE;
 	olc::Pixel pText = olc::YELLOW;
+	olc::Pixel pButtonBackground = olc::VERY_DARK_YELLOW;
 };
 

@@ -11,32 +11,32 @@ namespace def::gui
 	size_t Manager::AddComponent(Component* c)
 	{
 		if (!m_vecComponents.empty())
-			m_vecComponents.back()->bClicked = false;
-		c->bClicked = true;
+			m_vecComponents.back()->Clicked() = false;
+		c->Clicked() = true;
 
 		m_nSelected = m_vecComponents.size();
 		m_vecComponents.push_back(c);
 		return m_nSelected;
 	}
 
-	void Manager::Update(olc::PixelGameEngine& pge)
+	void Manager::Update(olc::PixelGameEngine* pge)
 	{
 		for (auto& c : m_vecComponents)
 		{
-			c->bClicked = false;
-			c->bUpdated = false;
+			c->Clicked() = false;
+			c->Updated() = false;
 
 			if (
-				pge.GetMousePos().x > c->vPos.x && pge.GetMousePos().x < c->vPos.x + c->vSize.x &&
-				pge.GetMousePos().y > c->vPos.y && pge.GetMousePos().y < c->vPos.y + c->vSize.y
+				pge->GetMousePos().x > c->Pos().x && pge->GetMousePos().x < c->Pos().x + c->Size().x &&
+				pge->GetMousePos().y > c->Pos().y && pge->GetMousePos().y < c->Pos().y + c->Size().y
 			)
 			{
 				c->OnHover();
 
-				if (pge.GetMouse(0).bPressed)
+				if (pge->GetMouse(0).bPressed)
 				{
-					m_nSelected = c->nOrder;
-					c->bClicked = true;
+					m_nSelected = c->Order();
+					c->Clicked() = true;
 					c->OnClick();
 				}
 			}

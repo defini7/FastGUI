@@ -14,9 +14,9 @@ namespace def::gui
 	{
 	public:
 		CheckBox() = default;
-		CheckBox(def::gui::Manager& manager, int32_t id, const std::string& text, const olc::vi2d& pos, bool checked = false);
+		CheckBox(Manager& m, int32_t id, const std::string& text, const olc::vi2d& pos, bool checked = false);
 
-		virtual void DrawSelf(olc::PixelGameEngine& pge) override;
+		virtual void DrawSelf(olc::PixelGameEngine* pge) override;
 
 		void SetText(const std::string& text);
 		std::string GetText();

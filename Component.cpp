@@ -2,19 +2,69 @@
 
 namespace def::gui
 {
-	Component::Component(def::gui::Manager& m) : m_manager(m)
+	Component::Component(def::gui::Manager& m) : manager(m)
 	{
-		nOrder = m_manager.AddComponent(this);
+		nOrder = manager.AddComponent(this);
 	}
 
 	bool Component::IsSelected()
 	{
-		return nOrder == m_manager.GetSelected();
+		return nOrder == manager.GetSelected();
+	}
+
+	bool& Component::FixedSize()
+	{
+		return bFixedSize;
+	}
+
+	bool& Component::Visible()
+	{
+		return bVisible;
+	}
+
+	bool& Component::HasBackground()
+	{
+		return bHasBackground;
+	}
+
+	bool& Component::HasBorders()
+	{
+		return bHasBorders;
+	}
+
+	bool& Component::Clicked()
+	{
+		return bClicked;
+	}
+
+	bool& Component::Updated()
+	{
+		return bUpdated;
+	}
+
+	int32_t& Component::ID()
+	{
+		return nID;
+	}
+
+	size_t& Component::Order()
+	{
+		return nOrder;
+	}
+
+	olc::vi2d& Component::Pos()
+	{
+		return vPos;
+	}
+
+	olc::vi2d& Component::Size()
+	{
+		return vSize;
 	}
 
 	void Component::OnClick()
 	{
-		m_manager.GetSelected() = nOrder;
+		manager.GetSelected() = nOrder;
 	}
 
 	void Component::OnHover() {}

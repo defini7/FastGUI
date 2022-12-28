@@ -15,8 +15,26 @@ namespace def::gui
 		Component(Manager& m);
 		virtual ~Component() = default;
 
-		virtual void DrawSelf(olc::PixelGameEngine& pge) = 0;
+		virtual void DrawSelf(olc::PixelGameEngine* pge) = 0;
+
+		bool IsSelected();
+		
+		bool& FixedSize();
+		bool& Visible();
+		bool& HasBackground();
+		bool& HasBorders();
+		bool& Clicked();
+		bool& Updated();
+
+		int32_t& ID();
+		size_t& Order();
+		olc::vi2d& Pos();
+		olc::vi2d& Size();
+
+		virtual void OnClick();
+		virtual void OnHover();
 	
+	protected:
 		int32_t nID = -1;
 		size_t nOrder = -1;
 
@@ -31,11 +49,6 @@ namespace def::gui
 		bool bClicked = false;
 		bool bUpdated = false;
 
-		bool IsSelected();
-
-		virtual void OnClick();
-		virtual void OnHover();
-
-		Manager& m_manager;
+		Manager& manager;
 	};
 }

@@ -2,7 +2,7 @@
 
 namespace def::gui
 {
-	Entry::Entry(Manager& manager, int32_t id, const olc::vi2d& pos, const olc::vi2d& size, const std::string& text) : Component(manager)
+	Entry::Entry(Manager& m, int32_t id, const olc::vi2d& pos, const olc::vi2d& size, const std::string& text) : Component(m)
 	{
 		vSize = size;
 		nID = id;
@@ -12,16 +12,16 @@ namespace def::gui
 		if (vSize > olc::vf2d(-1, -1))
 		{
 			vSize *= olc::vi2d(SYM_SIZE, SYM_SIZE);
-			vSize += olc::vi2d(2, 2);
+			vSize += olc::vi2d(3, 3);
 			bFixedSize = true;
 		}
 	}
 
-	void Entry::DrawSelf(olc::PixelGameEngine& pge)
+	void Entry::DrawSelf(olc::PixelGameEngine* pge)
 	{
 		if (!bVisible)
 		{
-			pge.TextEntryEnable(false);
+			pge->TextEntryEnable(false);
 			return;
 		}
 
@@ -30,24 +30,24 @@ namespace def::gui
 			if (bClicked)
 			{
 				bUpdated = true;
-				pge.TextEntryEnable(true, sText);
-				sText = pge.TextEntryGetString();
+				pge->TextEntryEnable(true, sText);
+				sText = pge->TextEntryGetString();
 			}
 			else
 			{
-				bUpdated = (pge.TextEntryGetString() != sText);
-				sText = pge.TextEntryGetString();
-				pge.TextEntryEnable(true, sText);
+				bUpdated = (pge->TextEntryGetString() != sText);
+				sText = pge->TextEntryGetString();
+				pge->TextEntryEnable(true, sText);
 			}
 		}
 
 		if (bHasBackground)
-			pge.FillRectDecal(vPos, vSize, m_manager.GetTheme().pBackground);
+			pge->FillRectDecal(vPos, vSize, manager.GetTheme().pBackground);
 
 		if (bHasBorders)
-			pge.DrawRectDecal(vPos, vSize, m_manager.GetTheme().pBorders);
+			pge->DrawRectDecal(vPos, vSize, manager.GetTheme().pBorders);
 
-		olc::vf2d vText = pge.GetTextSize(sText);
+		olc::vf2d vText = pge->GetTextSize(sText);
 
 		if (bFixedSize)
 		{
@@ -56,13 +56,13 @@ namespace def::gui
 			if (nRemoveCount > 0)
 			{
 				sText.erase(sText.length() - nRemoveCount, nRemoveCount);
-				pge.TextEntryEnable(true, sText);
+				pge->TextEntryEnable(true, sText);
 			}
 		}
 		else
 			vSize = vText + olc::vf2d(3.0f, 3.0f);
 
-		pge.DrawStringDecal(olc::vf2d((float)vPos.x + 2.0f, (float)vPos.y + ((float)vSize.y - vText.y) * 0.5f), sText, m_manager.GetTheme().pText);
+		pge->DrawStringDecal(olc::vf2d((float)vPos.x + 2.0f, (float)vPos.y + ((float)vSize.y - vText.y) * 0.5f), sText, manager.GetTheme().pText);
 	}
 
 	void Entry::SetText(const std::string& text)
