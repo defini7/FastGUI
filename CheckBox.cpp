@@ -2,13 +2,16 @@
 
 namespace def::gui
 {
-	CheckBox::CheckBox(Manager& m, int32_t id, const std::string& text, const olc::vi2d& pos, bool checked) : Component(m)
+	CheckBox::CheckBox(Manager& m, int32_t id, const std::string& text, const olc::vi2d& pos, const olc::vi2d& size, bool checked) : Component(m)
 	{
 		nID = id;
 		vPos = pos;
+		vSize = size;
 		bChecked = checked;
 		lText = new Label(m, -1, text, vPos + olc::vi2d(SYM_SIZE + SYM_SIZE / 2, 0));
-		vSize = olc::vi2d(SYM_SIZE + 3.0f, SYM_SIZE + 3.0f);
+
+		if (size == olc::vi2d(-1, -1)) vSize = olc::vi2d(SYM_SIZE + 3.0f, SYM_SIZE + 3.0f);
+		else						   vSize = size;
 	}
 
 	void CheckBox::DrawSelf(olc::PixelGameEngine* pge)

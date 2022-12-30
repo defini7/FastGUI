@@ -10,11 +10,11 @@
 
 namespace def::gui
 {
-	class CheckBox : public Component
+	class Radio : public Component
 	{
 	public:
-		CheckBox() = default;
-		CheckBox(Manager& m, int32_t id, const std::string& text, const olc::vi2d& pos, const olc::vi2d& size = { -1, -1 }, bool checked = false);
+		Radio() = default;
+		Radio(Manager& m, int32_t id, const std::string& text, const olc::vi2d& pos, int32_t radius = -1, bool checked = false);
 
 		virtual void DrawSelf(olc::PixelGameEngine* pge) override;
 
